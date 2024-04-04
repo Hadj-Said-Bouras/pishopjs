@@ -1,16 +1,27 @@
+"use client"
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch   } from "react-icons/fa";
 import { LuUser2 } from 'react-icons/lu';
 
 
 function NavBar() {
+    const [menu, setShowMenu] = useState(false)
   return (
     <div className='pb-10 sm:pb-10 h-full border-b-4 '>
-        <div className="flex justify-center bg-black text-white pt-2 pb-2 text-center">
+        <div className="flex justify-center bg-black text-white pt-2 pb-2 text-center ">
             <p className=''>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="/products" className='underline'><b> ShopNow</b></a></p>
-            <button className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex'>English <FaChevronDown className='ml-2 top-1'/></button>
+            <div className='relative'>
+
+            <button className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex' onClick={() => setShowMenu(!menu)}>English <FaChevronDown className='ml-2 top-1'/></button>
+            <div className={`${menu ? 'visibel' : 'hidden'} absolute top-6  text-black flex flex-col mt-1 p-3  left-10 w-40 bg-white rounded-md shadow-lg z-10 *:border *:border-white *:rounded-lg gap-2 `}>
+                <button className='hover:bg-gray-100'>Arabic</button>
+                <button className='hover:bg-gray-100'>English</button>
+                <button className='hover:bg-gray-100'>French</button>
+            </div>
+            </div>
         </div>
+
         <div className='flex mt-10'>
             <div className='flex justify-between w-full lg:w-0 '>
             <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl  '>PISHOP</Link>
