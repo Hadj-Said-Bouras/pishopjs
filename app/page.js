@@ -1,4 +1,3 @@
-import Image from "next/image";
 import RightBar from "../components/rightbar";
 import Banner from "../components/homebanner";
 import FlashSales from "../components/flashsales";

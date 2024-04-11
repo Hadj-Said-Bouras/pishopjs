@@ -6,12 +6,26 @@ import { HiOutlineArrowSmallRight, HiOutlineArrowSmallLeft  } from "react-icons/
 import { IoEyeOutline } from 'react-icons/io5';
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { useTimer } from 'react-timer-hook';
-
-import { Swiper, SwiperSlide, useSwiper,  } from 'swiper/react';
+import { useCart } from '@/app/cartcontext';
+import { Swiper, SwiperSlide  } from 'swiper/react';
+import { useWishlist } from '@/app/whitelistcontext';
 
 import 'swiper/swiper-bundle.css'
 
+
 function FlashSales() {
+
+    const { incrementCartCount } = useCart();
+    const { incrementWishlistCount } = useWishlist();
+
+    const handleAddToCart = () => {
+      incrementCartCount();
+    };
+
+    const handleAddToWishlist = () => {
+        incrementWishlistCount();
+      };
+
     const {
         seconds,
         minutes,
@@ -55,8 +69,7 @@ function FlashSales() {
 return (
     <div>
         <div className='w-full h-full'>
-
-            <div className='flex flex-row items-center bottom-[450px] sm:bottom-60 relative ml-1 sm:ml-10'>
+            <div className='flex flex-row items-center bottom-[450px] sm:bottom-60 ml-1 sm:ml-10'>
                 <div className='w-[20px] h-[60px] bg-red-500 rounded'></div>
                 <div className='ml-2'>Today&apos;s</div>
                 <h3 className='text-2xl font-bold relative ml-10 sm:ml-[100px]  md:mr-0 md:ml-[-90px] top-0 md:top-[130px]'>Flash Sales</h3>
@@ -114,14 +127,14 @@ return (
     
                         <IoEyeOutline className=' text-2xl '/>
                         </div>
-                        <div className='absolute ml-[280px] p-1 mt-[60px] bg-white z-20 hover:text-white hover:bg-red-500 rounded-full '>
+                        <div className='absolute ml-[280px] p-1 mt-[60px] bg-white z-20 hover:text-white hover:bg-red-500 rounded-full ' >
     
-                        <AiOutlineHeart className='text-2xl rounded-full'/>
+                        <AiOutlineHeart className='text-2xl rounded-full' onClick={handleAddToWishlist}/>
                         </div>
                                 <div className='w-80 h-[215px]  overflow-hidden top-0 rounded z-0 relative group' >
                                   <Image src={`${product.imgUrl}`}  alt='dsfa' width={800} height={300} className='  z-10' />      
-                                  <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  '>
-                                    <button>Add To Cart</button>
+                                  <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  cursor-pointer' onClick={handleAddToCart}>
+                                    <button >Add To Cart</button>
                                   </div>                          
                                     </div>
                                     <h1 className='font-bold tracking-wider'>{`${product.title}`}</h1>
