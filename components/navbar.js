@@ -1,29 +1,65 @@
 "use client"
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
-import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch   } from "react-icons/fa";
-import { LuUser2 } from 'react-icons/lu';
+import React, { useEffect, useRef, useState } from 'react'
+import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch, FaRegStar   } from "react-icons/fa";
+import { LuShoppingBag, LuUser2 } from 'react-icons/lu';
 import { useCart } from '@/app/cartcontext';
 import { useWishlist } from '@/app/whitelistcontext'
+import { IoCartOutline } from "react-icons/io5";
+import { FiUser } from "react-icons/fi";
+import { MdOutlineCancel, MdShoppingBag } from 'react-icons/md';
+import { TbLogout2 } from "react-icons/tb";
 
 function NavBar() {
     
     const [menu, setShowMenu] = useState(false)
     const { cartCount } = useCart();
     const { wishlistCount } = useWishlist();
+    const [userMenu, setUserMenu] = useState(false)
+
+    const menuRef = useRef(null); 
+    const buttonRef = useRef(null);
+
+
+    const handleOutsideClick = (event) => {
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(event.target) &&
+          event.target !== buttonRef.current
+        ) {
+           setShowMenu(false);
+           setUserMenu(false)
+        }
+      };
+    
+      useEffect(() => {
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+          document.removeEventListener('mousedown', handleOutsideClick);
+        };
+      }, []);
+
+
 
   return (
-    <div className='pb-10 sm:pb-10 h-full border-b-4 '>
-        <div className="flex justify-center bg-black text-white pt-2 pb-2 text-center ">
+    <div className='pb-10 sm:pb-10 h-full border-b-4 bg-white sticky top-0 z-50'>
+        <div className={`flex justify-center bg-black text-white pt-2 pb-2 text-center`} >
             <p className=''>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="/products" className='underline'><b> ShopNow</b></a></p>
-            <div className='relative'>
-            <button className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex' onClick={() => setShowMenu(!menu)}>English <FaChevronDown className='ml-2 top-1'/></button>
-            <div className={`${menu ? 'visibel' : 'hidden'} absolute top-6  text-black flex flex-col mt-1 p-3  left-10 w-40 bg-white rounded-md shadow-lg z-10 *:border *:border-white *:rounded-lg gap-2 `}>
-                <button className='hover:bg-gray-100'>Arabic</button>
-                <button className='hover:bg-gray-100'>English</button>
-                <button className='hover:bg-gray-100'>French</button>
+            <div className='relative' ref={menuRef}>
+            <button className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex' onClick={() => setShowMenu(!menu) && toggleMenu}>English <FaChevronDown className='ml-2 top-1'/></button>
+            {menu ? (
+
+                <div  className={`${menu ? 'visibel' : 'hidden'} absolute top-6  text-white flex flex-col mt-1 p-3  left-10 w-40  rounded-md bg-neutral-800/75  shadow-lg z-10  *:rounded-lg gap-2 `}>
+           
+                
+                    <button className='hover:translate-x-1 transition-all delay-100 ease-in-out'>Arabic</button>
+                    <button className='hover:translate-x-1 transition-all delay-100 ease-in-out'>English</button>
+                    <button className='hover:translate-x-1 transition-all delay-100 ease-in-out'>French</button>
+                
+                </div>  
+            ): null}
             </div>
-            </div>
+            
         </div>
 
         <div className='flex mt-10'>
@@ -51,20 +87,34 @@ function NavBar() {
                         <input type="text" placeholder='search' className='bg-inherit focus:outline-none p-2 md:hidden xl:flex'/>
                         <FaSearch className='mr-3'/>
                     </form>
-                    <div className=' flex'>
-                    <Link href={'/wishlist'} className='relative'><FaRegHeart className='text-xl ml-5 '/>
-                    {wishlistCount > 0 && (
-                                    <span className="absolute top-0 -mt-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
-                                        {wishlistCount}
-                                    </span>
-                                )}
-                                    </Link>
-                    <Link href={'/cart'} className='relative w-[50px]   '><FaShoppingCart className='text-xl ml-4'/>{cartCount > 0 && (
-                                    <span className="absolute top-0 -mt-2 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
-                                        {cartCount}
-                                    </span>
-                                )}</Link>
-                    <Link href={'account'}><LuUser2 className='text-xl'/></Link>
+                    <div className=' flex  items-center'>
+                    <Link href={'/wishlist'} className='relative rounded-full'><FaRegHeart className='text-xl ml-5 '/>
+                        {wishlistCount > 0 && (
+                                        <span className="absolute top-0 -mt-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                                            {wishlistCount}
+                                        </span>
+                        )}
+                    </Link>
+                    <Link href={'/cart'} className='relative w-[50px]  rounded-full p-1'><IoCartOutline  className='text-2xl ml-3'/>
+                        {cartCount > 0 && (
+                                        <span className="absolute top-0 -mt-2 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                                            {cartCount}
+                                        </span>
+                        )}
+                    </Link>
+                    <div className={`relative ${userMenu? 'text-white bg-red-500' : 'text-black'} p-1 pb-1 rounded-full cursor-pointer`}><LuUser2 className='text-xl' onClick={() => setUserMenu(!userMenu)}/>
+                    {userMenu ? (
+
+                        <div className={`${userMenu ? 'visibel' : 'hidden'} absolute top-6  -right-10 text-black flex flex-col mt-2 p-3 w-[220px] bg-white rounded-md shadow-lg z-10 *:p-1 *:text-left *:border *:border-white *:rounded-lg gap-2 `}>
+                            <Link href={'/account'} className='hover:bg-gray-100 flex items-center gap-2'><FiUser className='text-xl'/> Manage My Account</Link>
+                            <button className='hover:bg-gray-100 flex items-center gap-2'><LuShoppingBag  className='text-xl'/>My orders</button>
+                            <button className='hover:bg-gray-100 flex items-center gap-2'><MdOutlineCancel  className='text-xl' />My Cancellations</button>
+                            <button className='hover:bg-gray-100 flex items-center gap-2'><FaRegStar className='text-xl'/>My Reviews</button>
+                            <button className='hover:bg-gray-100 flex items-center gap-2'><TbLogout2 className='text-xl'/>My Logout</button>
+                        </div>   
+                    ): null}
+
+                    </div>
                     
                 </div>
                 </div>
