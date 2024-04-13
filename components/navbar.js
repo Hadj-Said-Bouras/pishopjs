@@ -64,7 +64,7 @@ function NavBar() {
                                         {cartCount}
                                     </span>
                                 )}</Link>
-                    <Link href={'account'}><LuUser2 className='text-xl ml-4'/></Link>
+                    <Link href={'account'}><LuUser2 className='text-xl'/></Link>
                     
                 </div>
                 </div>
