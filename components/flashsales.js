@@ -6,36 +6,39 @@ import { HiOutlineArrowSmallRight, HiOutlineArrowSmallLeft  } from "react-icons/
 import { IoEyeOutline } from 'react-icons/io5';
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { useTimer } from 'react-timer-hook';
-import { useCart } from '@/app/cartcontext';
+import  useCart from '@/components/cartcontext';
 import { Swiper, SwiperSlide  } from 'swiper/react';
-import { useWishlist } from '@/app/whitelistcontext';
 
 import 'swiper/swiper-bundle.css'
+import useWishlist from './whitelistcontext';
 
 
 function FlashSales() {
 
-    const { incrementCartCount } = useCart();
-    const { incrementWishlistCount } = useWishlist();
+  const { addToCart, removeFromCart, cartItems } = useCart();
+  const { addToWhishList, removeItemFromWhishList, whishListItems } = useWishlist()
 
-    const handleAddToCart = () => {
-      incrementCartCount();
-    };
+  const handleAddToCart = (index) => {
+    if (!cartItems.includes(index)) {
+      addToCart(index);
+    } else {
+      removeFromCart(index);
+    }
+  };
 
-    const handleAddToWishlist = () => {
-        incrementWishlistCount();
-      };
+  const handleAddToWishlist = (index) => {
+    if (!whishListItems.includes(index)) {
+      addToWhishList(index);
+    } else {
+      removeItemFromWhishList(index);
+    }
+  };
 
     const {
         seconds,
         minutes,
         hours,
         days,
-        isRunning,
-        start,
-        pause,
-        resume,
-        restart,
       } = useTimer({ 
             expiryTimestamp: Date.now() + 24 * 60 * 60 * 1000,
             onExpire: () => console.warn('onExpire called') 
@@ -59,12 +62,12 @@ function FlashSales() {
     };
 
     const products = [
-        {title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
-        {title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
-        {title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
-        {title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
-        {title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
-        {title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
+        {id: 1, title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
+        {id: 2, title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
+        {id: 3, title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
+        {id: 4, title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
+        {id: 5, title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
+        {id: 6, title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
     ]
 return (
     <div>
@@ -129,11 +132,11 @@ return (
                         </div>
                         <div className='absolute ml-[280px] p-1 mt-[60px] bg-white z-20 hover:text-white hover:bg-red-500 rounded-full ' >
     
-                        <AiOutlineHeart className='text-2xl rounded-full' onClick={handleAddToWishlist}/>
+                        <AiOutlineHeart className='text-2xl rounded-full' onClick={() => handleAddToWishlist(product)}/>
                         </div>
                                 <div className='w-80 h-[215px]  overflow-hidden top-0 rounded z-0 relative group' >
                                   <Image src={`${product.imgUrl}`}  alt='dsfa' width={800} height={300} className='  z-10' />      
-                                  <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  cursor-pointer' onClick={handleAddToCart}>
+                                  <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  cursor-pointer' onClick={() => handleAddToCart(product)}>
                                     <button >Add To Cart</button>
                                   </div>                          
                                     </div>

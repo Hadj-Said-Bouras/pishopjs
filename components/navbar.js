@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react'
 import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch, FaRegStar   } from "react-icons/fa";
 import { LuShoppingBag, LuUser2 } from 'react-icons/lu';
-import { useCart } from '@/app/cartcontext';
-import { useWishlist } from '@/app/whitelistcontext'
+import useCart  from '@/components/cartcontext';
+import  useWishlist  from '@/components/whitelistcontext'
 import { IoCartOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineCancel, MdShoppingBag } from 'react-icons/md';
@@ -97,7 +97,7 @@ function NavBar() {
                     </Link>
                     <Link href={'/cart'} className='relative w-[50px]  rounded-full p-1'><IoCartOutline  className='text-2xl ml-3'/>
                         {cartCount > 0 && (
-                                        <span className="absolute top-0 -mt-2 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                                        <span className="absolute top-0 -mt-1 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
                                             {cartCount}
                                         </span>
                         )}
