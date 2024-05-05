@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import { IoEyeOutline } from 'react-icons/io5'
-import { MdOutlineStarPurple500 } from 'react-icons/md'
 import { RiStarSFill } from 'react-icons/ri'
 
 function ProductsList(props) {
@@ -14,7 +13,7 @@ function ProductsList(props) {
                             <IoEyeOutline className=' text-2xl '/>
                             </div>
                                     <div className='w-80 h-[215px]  overflow-hidden top-0 rounded z-0 relative group' >
-                                      <Image src={'/2.png'}  alt='dsfa' width={800} height={300} className='  z-10' />      
+                                      <Image src={'/p2.jpg'}  alt='dsfa' width={800} height={300} className='z-10' />      
                                       <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  '>
                                         <button>Add To Cart</button>
                                       </div>                          
@@ -29,8 +28,8 @@ function ProductsList(props) {
                                         <RiStarSFill className='text-gray-400'/>
                                             <p className='text-gray-500 ml-2'>{`(150 reviews)`}</p>
                                         </div>
+                                        
                                   
-
         </div>
     </div>
   )

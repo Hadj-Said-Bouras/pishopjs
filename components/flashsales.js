@@ -18,21 +18,23 @@ function FlashSales() {
   const { addToCart, removeFromCart, cartItems } = useCart();
   const { addToWhishList, removeItemFromWhishList, whishListItems } = useWishlist()
 
-  const handleAddToCart = (index) => {
-    if (!cartItems.includes(index)) {
-      addToCart(index);
+  const handleAddToCart = (product) => {
+    if (cartItems.find(item => item.id === product.id)) {
+      console.log('removing ')
+        removeFromCart(product);
     } else {
-      removeFromCart(index);
+        addToCart(product);
     }
-  };
+};
 
-  const handleAddToWishlist = (index) => {
-    if (!whishListItems.includes(index)) {
-      addToWhishList(index);
-    } else {
-      removeItemFromWhishList(index);
-    }
-  };
+const handleAddToWishlist = (product) => {
+  if (whishListItems.find(item => item.id === product.id)) {
+    console.log('removing ')
+    removeItemFromWhishList(product);
+  } else {
+    addToWhishList(product);
+  }
+};
 
     const {
         seconds,
@@ -119,7 +121,7 @@ return (
                         slidesPerView: 4,
                     },
                     }}
-                    className='bottom-[300px] sm:bottom-0 left-auto'
+                    className='xl:top-[150px] sm:bottom-0 left-auto'
                     >
                     {products.map((product, index) => (
                         
@@ -159,7 +161,7 @@ return (
                     
         
 
-            <div className='flex justify-center  top-[1050px] absolute sm:static mb-10 mt-20 w-full'>
+            <div className='flex justify-center absolute sm:static mb-20 mt-10 lg:mt-60 w-full'>
                 <button className=' p-3 bg-red-400 text-white hover:bg-red-500'>View All Products</button>
             </div>
         

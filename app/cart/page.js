@@ -3,12 +3,14 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { CiHeart } from 'react-icons/ci';
 import useCart  from '../../components/cartcontext';
+import useWishlist  from '@/components/whitelistcontext';
 import { IoMdCloseCircle } from "react-icons/io";
 
 
 function Cart() {
   
-  const { cartItems, removeFromCart } = useCart();
+  const { wishlistCount, addToWhishList, removeItemFromWhishList } = useWishlist();
+  const { cartItems, addToCart, removeFromCart, cartCount } = useCart();
   const [quantities, setQuantities] = useState(cartItems.map(() => 1));
 
   const handleQuantityChange = (index, value) => {
@@ -76,7 +78,7 @@ function Cart() {
              <p className='w-[40%] flex flex-row items-center gap-4'>
               <div className='relative group'>
               <IoMdCloseCircle className='text-xl text-red-500 hidden group-hover:flex absolute -top-5 left-0' onClick={() => handelRemoveFromCart(item)}/>
-              <Image src={'/test.png'} width={50} height={50} alt='falkj' />
+              <Image src={item.imgUrl} width={50} height={50} alt='falkj' />
               </div>
               {item.title}</p>
              <p className='w-[25%]'>${parseFloat(item.price.replace(/[^0-9.-]+/g, ""))}</p>
