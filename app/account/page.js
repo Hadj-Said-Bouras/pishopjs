@@ -1,6 +1,18 @@
+"use client"
+import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../firebase/config'
 
 function Account() {
+    const [user] = useAuthState(auth)
+    const router = useRouter()
+    const userSession = sessionStorage.getItem('user')
+
+    if(!user && !userSession) {
+        router.push('/')
+    }
+
   return (
     <div>
         <div className='flex flex-row justify-between flex-wrap lg:flex-nowrap'>
