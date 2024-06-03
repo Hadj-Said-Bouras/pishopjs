@@ -1,13 +1,13 @@
 "use client"
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch, FaRegStar } from "react-icons/fa";
 import { LuShoppingBag, LuUser2 } from 'react-icons/lu';
 import useCart from '@/components/cartcontext';
-import useWishlist from '@/components/whitelistcontext'
+import useWishlist from '@/components/whitelistcontext';
 import { IoCartOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
-import { MdOutlineCancel, MdShoppingBag } from 'react-icons/md';
+import { MdOutlineCancel } from 'react-icons/md';
 import { TbLogout2 } from "react-icons/tb";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
@@ -15,13 +15,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 function NavBar() {
 
-    const [menu, setShowMenu] = useState(false)
+    const [menu, setShowMenu] = useState(false);
     const { cartCount } = useCart();
     const { wishlistCount } = useWishlist();
-    const [userMenu, setUserMenu] = useState(false)
-    const [hideMenu, setHideMenu] = useState(false)
-    const userSession = useAuthState(auth)
-
+    const [userMenu, setUserMenu] = useState(false);
+    const [hideMenu, setHideMenu] = useState(false);
+    const [userSession] = useAuthState(auth);
 
     const menuRef = useRef(null);
     const buttonRef = useRef(null);
@@ -33,7 +32,7 @@ function NavBar() {
             event.target !== buttonRef.current
         ) {
             setShowMenu(false);
-            setUserMenu(false)
+            setUserMenu(false);
         }
     };
 
@@ -42,16 +41,12 @@ function NavBar() {
     };
 
     const handleMouseEnterLangs = () => {
-        setShowMenu(true)
-    }
+        setShowMenu(true);
+    };
 
     useEffect(() => {
-        if (!userSession) {
-            setHideMenu(true)
-        } else {
-            setHideMenu(false)
-        }
-    })
+        setHideMenu(!userSession);
+    }, [userSession]);
 
     useEffect(() => {
         document.addEventListener('mousedown', handleOutsideClick);
@@ -93,7 +88,7 @@ function NavBar() {
                         <Link href='/' className='transition transform hover:translate-y-1 duration-300'>Home</Link>
                         <Link href='/contact' className='transition transform hover:translate-y-1 duration-300'>Contact</Link>
                         <Link href='/about' className='transition transform hover:translate-y-1 duration-300'>About</Link>
-                        <Link href='login' className='transition transform hover:translate-y-1 duration-300'>Login</Link>
+                        <Link href='login' className={`${hideMenu ? "flex" : "hidden"} transition transform hover:translate-y-1 duration-300`}>Login</Link>
                     </div>
                     <div className='flex  items-center mr-0 lg:mr-80 xl:mr-0 lg:flex'>
                         <form className='flex items-center md:bg-transparent xl:bg-gray-100'>
@@ -118,11 +113,11 @@ function NavBar() {
                             <div
                                 ref={menuRef}
                                 onMouseEnter={handleMouseEnterUserMenu}
-                                className={`relative ${userMenu ? 'text-white bg-red-500' : 'text-black'} p-1 pb-1 rounded-full cursor-pointer`}
+                                className={`relative ${userMenu ? 'text-white bg-red-500' : 'text-black'} ${hideMenu ? "hidden" : "flex"} p-1 pb-1 rounded-full cursor-pointer`}
                             >
-                                <LuUser2 className='text-xl' />
+                                <LuUser2 className={`text-xl `} />
                                 {userMenu && (
-                                    <div className={`absolute top-6 -right-10 text-black flex flex-col mt-2 p-3 w-[220px] bg-white rounded-md shadow-lg z-10 *:p-1 *:text-left *:border *:border-white *:rounded-lg gap-2 ${hideMenu ? "hidden" : "flex"}`}>
+                                    <div className={`absolute top-6 -right-10 text-black flex flex-col mt-2 p-3 w-[220px] bg-white rounded-md shadow-lg z-10 *:p-1 *:text-left *:border *:border-white *:rounded-lg gap-2 `}>
                                         <Link href={'/account'} className='hover:bg-gray-100 flex items-center gap-2'><FiUser className='text-xl' /> Manage My Account</Link>
                                         <button className='hover:bg-gray-100 flex items-center gap-2'><LuShoppingBag className='text-xl' />My orders</button>
                                         <button className='hover:bg-gray-100 flex items-center gap-2'><MdOutlineCancel className='text-xl' />My Cancellations</button>
@@ -130,8 +125,11 @@ function NavBar() {
                                         
 
                                             <button className='hover:bg-gray-100 flex items-center gap-2' onClick={() => {
-                                                signOut(auth)
-                                                
+                                                signOut(auth).then(() => {
+                                                    setHideMenu(true);
+                                                }).catch((error) => {
+                                                    console.error("Sign out error", error);
+                                                });
                                             }}><TbLogout2 className='text-xl' />Logout</button>
                  
                                     </div>
@@ -144,4 +142,4 @@ function NavBar() {
             )
          }
          
-         export default NavBar
+         export default NavBar;

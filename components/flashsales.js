@@ -11,9 +11,11 @@ import { Swiper, SwiperSlide  } from 'swiper/react';
 
 import 'swiper/swiper-bundle.css'
 import useWishlist from './whitelistcontext';
-
-
+import { useRouter } from 'next/navigation';
+import { Products } from '../app/products'
 function FlashSales() {
+
+  const router = useRouter()
 
   const { addToCart, removeFromCart, cartItems } = useCart();
   const { addToWhishList, removeItemFromWhishList, whishListItems } = useWishlist()
@@ -64,12 +66,7 @@ const handleAddToWishlist = (product) => {
     };
 
     const products = [
-        {id: 1, title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
-        {id: 2, title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
-        {id: 3, title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
-        {id: 4, title: 'mouse', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p2.jpg'},
-        {id: 5, title: 'computer', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p3.jpg'},
-        {id: 6, title: 'phone', price: '$20', comparedPrice: '$50', reviews: 50, imgUrl: '/p4.jpg'},
+      <Products />
     ]
 return (
     <div>
@@ -123,14 +120,18 @@ return (
                     }}
                     className='xl:top-[150px] sm:bottom-0 left-auto'
                     >
-                    {products.map((product, index) => (
+                    {Products.map((product, index) => (
                         
 
                         <SwiperSlide key={index} className='  ml-10 lg:ml-5'>
                         <div className='h-80 w-80 flex  flex-col gap-2'>
                         <div className='absolute ml-[280px] p-1 mt-5 hover:text-white hover:bg-red-500 bg-white z-20  rounded-full  '>
     
-                        <IoEyeOutline className=' text-2xl '/>
+                        <IoEyeOutline className=' text-2xl '                    
+                        onClick={() => {
+                          router.push(`/product/${product.id}`)            
+                         
+                        }}/>
                         </div>
                         <div className='absolute ml-[280px] p-1 mt-[60px] bg-white z-20 hover:text-white hover:bg-red-500 rounded-full ' >
     
