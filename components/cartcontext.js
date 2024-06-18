@@ -14,7 +14,7 @@ export function CartProvider({ children }) {
 
   const removeFromCart = (itemToRemove) => {
     if (itemToRemove) {
-      setCartItems(...cartItems, !itemToRemove)
+      setCartItems((prevItems) => prevItems.filter(item => item.id !== itemToRemove.id))
     } else {
       "nothing"
     }

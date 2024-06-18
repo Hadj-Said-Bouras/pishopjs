@@ -13,7 +13,7 @@ function ProductsList(props) {
                             <IoEyeOutline className=' text-2xl '/>
                             </div>
                                     <div className='w-80 h-[215px]  overflow-hidden top-0 rounded z-0 relative group' >
-                                      <Image src={'/p2.jpg'}  alt='dsfa' width={800} height={300} className='z-10' />      
+                                      <Image src={props.imgUrl}  alt='dsfa' width={800} height={300} className='z-10' />      
                                       <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  '>
                                         <button>Add To Cart</button>
                                       </div>                          

@@ -3,7 +3,7 @@
 import React from 'react'
 import ProductsList from '../../components/products'
 import ItemsHead from '../../components/itemshead'
-import useWishlist from '@/components/whitelistcontext';
+import useWishlist from '../../components/whitelistcontext';
 import { IoMdCloseCircle } from 'react-icons/io';
 
 function WishList() {
@@ -20,6 +20,8 @@ function WishList() {
     const handelRemoveFromCart = (product) => {
         removeItemFromWhishList(product)
     }
+
+    console.log(whishListItems.imgUrl)
   return (
     <div>
         <div className='flex flex-row justify-between items-center m-10'>

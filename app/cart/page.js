@@ -3,13 +3,12 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { CiHeart } from 'react-icons/ci';
 import useCart  from '../../components/cartcontext';
-import useWishlist  from '@/components/whitelistcontext';
+import useWishlist  from '../../components/whitelistcontext';
 import { IoMdCloseCircle } from "react-icons/io";
 
 
 function Cart() {
   
-  const { wishlistCount, addToWhishList, removeItemFromWhishList } = useWishlist();
   const { cartItems, addToCart, removeFromCart, cartCount } = useCart();
   const [quantities, setQuantities] = useState(cartItems.map(() => 1));
 

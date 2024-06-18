@@ -6,7 +6,7 @@ import { HiOutlineArrowSmallRight, HiOutlineArrowSmallLeft  } from "react-icons/
 import { IoEyeOutline } from 'react-icons/io5';
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { useTimer } from 'react-timer-hook';
-import  useCart from '@/components/cartcontext';
+import  useCart from '../components/cartcontext';
 import { Swiper, SwiperSlide  } from 'swiper/react';
 
 import 'swiper/swiper-bundle.css'
@@ -22,7 +22,7 @@ function FlashSales() {
 
   const handleAddToCart = (product) => {
     if (cartItems.find(item => item.id === product.id)) {
-      console.log('removing ')
+
         removeFromCart(product);
     } else {
         addToCart(product);
@@ -30,13 +30,14 @@ function FlashSales() {
 };
 
 const handleAddToWishlist = (product) => {
-  if (whishListItems.find(item => item.id === product.id)) {
-    console.log('removing ')
-    removeItemFromWhishList(product);
-  } else {
-    addToWhishList(product);
+      if (whishListItems.find(item => item.id === product.id)) {
+        
+        removeItemFromWhishList(product);
+        
+      } else {
+        addToWhishList(product);
+      }
   }
-};
 
     const {
         seconds,
@@ -65,9 +66,9 @@ const handleAddToWishlist = (product) => {
       }
     };
 
-    const products = [
-      <Products />
-    ]
+
+
+
 return (
     <div>
         <div className='w-full h-full'>
@@ -135,10 +136,10 @@ return (
                         </div>
                         <div className='absolute ml-[280px] p-1 mt-[60px] bg-white z-20 hover:text-white hover:bg-red-500 rounded-full ' >
     
-                        <AiOutlineHeart className='text-2xl rounded-full' onClick={() => handleAddToWishlist(product)}/>
+                        <AiOutlineHeart className='text-2xl rounded-full' onClick={() => handleAddToWishlist(product) && addToWhishList(product)}/>
                         </div>
                                 <div className='w-80 h-[215px]  overflow-hidden top-0 rounded z-0 relative group' >
-                                  <Image src={`${product.imgUrl[1]}`}  alt='dsfa' width={800} height={300} className='  z-10' />      
+                                  <Image src={`${product.imgUrl[0]}`}  alt='dsfa' width={800} height={300} className='  z-10' />      
                                   <div className='absolute bottom-0 w-full h-8 items-center text-lg bg-black transition-all delay-300 text-white flex flex-row justify-center  translate-y-0 lg:translate-y-8 ease-out group-hover:translate-y-0  cursor-pointer' onClick={() => handleAddToCart(product)}>
                                     <button >Add To Cart</button>
                                   </div>                          
@@ -152,7 +153,9 @@ return (
                                         <MdOutlineStarPurple500 />
                                         <p className='text-gray-500 ml-2'>{`${product.reviews}`}</p>
                                     </div>
-                              
+                                    <div className='text-gray-500 ml-2 max-h-8 overflow-hidden text-ellipsis'>
+                                    <p className='leading-tight'>{product.description}</p>
+                                </div>                              
                         </div>
                     </SwiperSlide>
                    

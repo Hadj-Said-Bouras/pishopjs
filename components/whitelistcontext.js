@@ -6,15 +6,13 @@
   export function WishlistProvider({ children }) {
       const [whishListItems, setWishlistItems] = useState([]);
 
-    const addToWhishList = (item) => {
-      setWishlistItems((prevItems) => [...prevItems, item]);
+      const addToWhishList = (item) => {
+        setWishlistItems(prevItems => [...prevItems, item]);
     };
   
     const removeItemFromWhishList = (itemToRemove) => {
       if (itemToRemove) {
-        setWishlistItems(...whishListItems, !itemToRemove)
-      } else {
-        "nothing"
+        setWishlistItems(prevItems => prevItems.filter(item => item.id !== itemToRemove.id));
       }
     };
     
