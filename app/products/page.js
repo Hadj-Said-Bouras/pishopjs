@@ -7,6 +7,8 @@ function ProuctList() {
 
   const [searchValue, setSearchValue] = useState('')
   const [filteredItems, setFilteredItems] = useState(Products)
+  const [pageNum, setPageNum] = useState(5)
+  const [showItems, setShowItems] = useState(filteredItems.slice(0, 5) )
 
 
   useEffect(() => {
@@ -16,6 +18,19 @@ function ProuctList() {
       
     )
   }, [searchValue])
+
+
+  const handlePagination = () => {
+    setPageNum(pageNum + 5)
+    
+    const showedItems = Products.slice(pageNum, pageNum + 5)
+    setShowItems(showedItems);
+    
+    if (pageNum >= Products.length) {
+      alert('nothing to show')
+    }
+
+  }
 
 
   return (
@@ -33,7 +48,7 @@ function ProuctList() {
 
       <div className=' flex w-full justify-center gap-5 flex-wrap  mt-20 '>
       
-      {filteredItems.map((product, index) => (
+      {showItems.map((product, index) => (
         <div key={index}>
 
         <ProductsList  imgUrl={product.imgUrl} product={product.title} comparedPrice={product.comparedPrice} price={product.price} reviews={product.reviews} id={product.id}/>
@@ -41,6 +56,8 @@ function ProuctList() {
       ))}
       </div>
       </div>
+
+      <button onClick={handlePagination}>Click Me</button>
       </div>
   )
 }
