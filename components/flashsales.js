@@ -95,7 +95,7 @@ return (
                 <button onClick={handleNextSlide}><HiOutlineArrowSmallRight  className='bg-gray-200 rounded-full'/></button>
                 </div>
             </div>
-                
+               <div className='ml-5'>
                 <Swiper 
                     
                     spaceBetween={50}
@@ -119,12 +119,13 @@ return (
                         slidesPerView: 4,
                     },
                     }}
-                    className='xl:top-[150px] sm:bottom-0 left-auto'
+                    className='xl:top-[150px] sm:bottom-0'
                     >
                     {Products.map((product, index) => (
                         
+                          
 
-                        <SwiperSlide key={index} className='  ml-10 lg:ml-5'>
+                        <SwiperSlide key={index} className='lg:ml-5'>
                         <div className='h-80 w-80 flex  flex-col gap-2'>
                         <div className='absolute ml-[280px] p-1 mt-5 hover:text-white hover:bg-red-500 bg-white z-20  rounded-full  '>
     
@@ -153,15 +154,17 @@ return (
                                         <MdOutlineStarPurple500 />
                                         <p className='text-gray-500 ml-2'>{`${product.reviews}`}</p>
                                     </div>
-                                    <div className='text-gray-500 ml-2 max-h-8 overflow-hidden text-ellipsis'>
+                                    {/* <div className='text-gray-500 ml-2 max-h-8 overflow-hidden text-ellipsis'>
                                     <p className='leading-tight'>{product.description}</p>
-                                </div>                              
+                                </div>                               */}
                         </div>
                     </SwiperSlide>
                    
                      
+                   
                     ))}
             </Swiper>
+                    </div> 
                     
         
 

@@ -41,27 +41,29 @@ function Categories() {
                       <button onClick={handleNextSlide}><HiOutlineArrowSmallRight  className='bg-gray-200 rounded-full'/></button>
             </div>
           </div>
+          <div className='ml-5'>
+
         <Swiper
-          spaceBetween={50}
+          spaceBetween={30}
           slidesPerView={2}
           onInit={handleInit}
           breakpoints={{
             768: { 
             slidesPerView: 4,
         },
-
+        
         480: {
             slidesPerView: 3,
         },
         320: {
             slidesPerView: 2,
-        },
+          },
         1024: {
             slidesPerView: 6,
-        }, 
-        1200:{
+          }, 
+          1200:{
             slidesPerView: 6,
-        },
+          },
         }}
         className='flex justify-center'
         >
@@ -70,7 +72,7 @@ function Categories() {
            
             
 
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300 ml-2'>
+            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
 
               <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
               <p>Iphones</p>
@@ -119,8 +121,9 @@ function Categories() {
             </div>
           </SwiperSlide>
         </Swiper>
+          </div>
         
-         <div className="h-[1px] w-[1300px] mx-auto bg-gray-400 mt-20"></div>
+         <div className="h-[1px] w-full mx-auto bg-gray-400 mt-20"></div>
     </div>
   )
 }

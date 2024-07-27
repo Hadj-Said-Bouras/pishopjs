@@ -241,7 +241,7 @@ function OurProducts() {
                             </div>
                         </div>
                  </div>
-                 <div className="h-[1px] w-[1300px] mx-auto bg-gray-400 "></div>
+                 <div className="h-[1px] w-full mx-auto bg-gray-400 "></div>
             </div>
           )
 }
