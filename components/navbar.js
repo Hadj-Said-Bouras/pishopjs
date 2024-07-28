@@ -10,7 +10,7 @@ import { FiUser } from "react-icons/fi";
 import { MdOutlineCancel } from 'react-icons/md';
 import { TbLogout2 } from "react-icons/tb";
 import { signOut } from 'firebase/auth';
-import { auth } from '@/app/firebase/config';
+import { auth } from '../app/firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function NavBar() {
@@ -58,7 +58,7 @@ function NavBar() {
                 <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="/products" className='underline'><b>ShopNow</b></a></p>
                 <div className='relative' ref={languageMenuRef}>
                     <button 
-                        className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex' 
+                        className='pl-20 flex items-center hidden sm:hidden lg:flex md:hidden xl:flex'
                         onClick={toggleLanguageMenu}
                     >
                         English <FaChevronDown className='ml-2 top-1' />
@@ -80,6 +80,7 @@ function NavBar() {
                         <Link href={'/products'}> <FaSearch className='mr-1' /></Link>
                         <Link href={'/whishlist'}> <FaRegHeart className='ml-5 mr-5' /></Link>
                         <Link href={'/cart'}> <FaShoppingCart /></Link>
+                        <Link href={'/account'}><LuUser2 className='text-xl ml-5' /></Link>
                     </div>
                 </div>
                 <div className='flex flex-row justify-center w-full hidden md:ml-80 sm:hidden lg:flex'>
