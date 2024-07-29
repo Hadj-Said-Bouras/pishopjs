@@ -58,7 +58,7 @@ function LoginForm() {
                     <button className='bg-red-600 text-white text-lg px-7 py-2 rounded' onClick={handleLogIn}>Log In</button>
                     <p className='text-red-500 cursor-pointer'>Forget Password?</p>
                     </div>
-                    <p className='text-center'>Don&apos;`t Have an account? <Link href={'/register'} className='text-red-500 underline cursor-pointer '> Register now!</Link></p>
+                    <p className='text-center'>Don&apos;t Have an account? <Link href={'/register'} className='text-red-500 underline cursor-pointer '> Register now!</Link></p>
                     </div>
                 </form>
             </div>

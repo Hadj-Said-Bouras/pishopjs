@@ -46,7 +46,7 @@ function Cart() {
             <p className='mx-2 text-xl font-bold'>Shopping Cart</p>
             <div className='flex flex-row justify-between mx-2 text-xl font-bold mt-5'>
 
-            <p>Estimated total {wishlistCount} </p><span>$997</span>
+            <p>Estimated total  </p><span>$997</span>
             </div>
             <button className='p-3 px-3 text-lg text-white bg-red-600 rounded mb-5 mt-2 w-full'>Proceed To Checkout</button>
             <div className='flex flex-col'>

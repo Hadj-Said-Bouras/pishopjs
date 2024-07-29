@@ -1,17 +1,20 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase/config'
 
 function Account() {
-    const [user] = useAuthState(auth)
-    const router = useRouter()
-    const userSession = sessionStorage.getItem('user')
+    const [user] = useAuthState(auth);
+    const router = useRouter();
 
-    if(!user && !userSession) {
-        router.push('/')
-    }
+    useEffect(() => {
+        const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null;
+
+        if (!user && !userSession) {
+            router.push('/');
+        }
+    }, [user, router]);
 
   return (
     <div>
@@ -56,9 +59,9 @@ function Account() {
                     </div>
                     <div className='grid grid-cols-1 mt-5 gap-5 mb-10'>
                         <h1>Password Change</h1>
-                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="passowrd" name="" id="" placeholder='******' />
-                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="passowrd" name="" id="" placeholder='******' />
-                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="passowrd" name="" id="" placeholder='******' />
+                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="password" name="" id="" placeholder='******' />
+                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="password" name="" id="" placeholder='******' />
+                        <input className='p-3 bg-gray-100 w-full lg:w-[970px]' type="password" name="" id="" placeholder='******' />
                     </div>
                     <div className='flex items-center flex-row-reverse mr-10 gap-5'>
                     <button className='p-3 px-3 text-lg text-white bg-red-600 rounded mb-5'>Save Changes</button>
