@@ -79,7 +79,7 @@ function NavBar() {
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
                     <div className='flex flex-row gap-2 mr-20 items-center lg:hidden md:flex text-xl rounded-md'>
                         <Link href={'/products'}> <FaSearch className='mr-1' /></Link>
-                        <Link href={'/whishlist'}> <FaRegHeart className='ml-5 mr-5' /></Link>
+                        <Link href={'/wishlist'}> <FaRegHeart className='ml-5 mr-5' /></Link>
                         <Link href={'/cart'}> <FaShoppingCart /></Link>
                         <Link href={'/account'}><LuUser2 className='text-xl ml-5' /></Link>
                     </div>
