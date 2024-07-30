@@ -28,13 +28,21 @@ function LoginForm() {
   const handleLogIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password)
-      console.log(res)
-      sessionStorage.setItem('user', true)
-      setemail('')
-      setPassword('')
-      router.push('/')
+
+      if (res.user) {
+
+        sessionStorage.setItem('user', true)
+        setemail('')
+        setPassword('')
+        router.push('/')
+      } else {
+        alert('unvaild login')
+        
+      }
     } catch(e) {
       console.error(e)
+      alert('unvaild login')
+
     }
   }
 
