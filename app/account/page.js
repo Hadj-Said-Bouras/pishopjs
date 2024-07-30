@@ -13,6 +13,8 @@ function Account() {
 
         if (!user && !userSession) {
             router.push('/');
+        } else {
+            router.push('/login')
         }
     }, [user, router]);
 

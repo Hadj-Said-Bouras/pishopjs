@@ -6,9 +6,11 @@ import Link from 'next/link'
 import { auth } from '../firebase/config'
 
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/navigation'
 
 function Regsiter() {
-
+  
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [
@@ -29,6 +31,7 @@ function Regsiter() {
       sessionStorage.setItem('user', true)
       setEmail('')
       setPassword('')
+      router.push('/')
     } catch(e) {
       console.error(e)
     }

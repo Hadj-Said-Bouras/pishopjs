@@ -20,6 +20,7 @@ function NavBar() {
     const [userSession] = useAuthState(auth);
     const { cartCount, searchFn } = useCart();
     const { wishlistCount } = useWishlist();
+    const [user] = useAuthState(auth)
 
     const languageMenuRef = useRef(null);
     const userMenuRef = useRef(null);
@@ -118,7 +119,7 @@ function NavBar() {
                                 className={`relative ${userMenu ? 'text-white bg-red-500' : 'text-black'} ${hideMenu ? "hidden" : "flex"} p-1 pb-1 rounded-full cursor-pointer`}
                             >
                                 <LuUser2 className='text-xl' />
-                                {userMenu && (
+                                {user ? userMenu && (
                                     <div className='absolute top-6 -right-10 text-black flex flex-col mt-2 p-3 w-[220px] bg-white rounded-md shadow-lg z-10 *:p-1 *:text-left *:border *:border-white *:rounded-lg gap-2'>
                                         <Link href={'/account'} className='hover:bg-gray-100 flex items-center gap-2'><FiUser className='text-xl' /> Manage My Account</Link>
                                         <button className='hover:bg-gray-100 flex items-center gap-2'><LuShoppingBag className='text-xl' />My orders</button>
@@ -132,7 +133,7 @@ function NavBar() {
                                             });
                                         }}><TbLogout2 className='text-xl' />Logout</button>
                                     </div>
-                                )}
+                                ): null}
                             </div>
                         </div>
                     </div>
