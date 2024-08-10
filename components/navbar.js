@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch, FaRegStar } from "react-icons/fa";
-import { LuShoppingBag, LuUser2 } from 'react-icons/lu';
+import { LuShoppingBag, LuUser2, LuMenu } from 'react-icons/lu';
 import useCart from '../components/cartcontext';
 import useWishlist from '../components/whitelistcontext';
 import { IoCartOutline } from "react-icons/io5";
@@ -12,6 +12,7 @@ import { TbLogout2 } from "react-icons/tb";
 import { signOut } from 'firebase/auth';
 import { auth } from '../app/firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { IoMdClose } from 'react-icons/io';
 
 function NavBar() {
     const [languageMenu, setLanguageMenu] = useState(false);
@@ -21,6 +22,8 @@ function NavBar() {
     const { cartCount, searchFn } = useCart();
     const { wishlistCount } = useWishlist();
     const [user] = useAuthState(auth)
+    const [mobileMenu, setMobileMenu] = useState(false)
+    const [menuClick, setMenuClick] = useState(false)
 
     const languageMenuRef = useRef(null);
     const userMenuRef = useRef(null);
@@ -51,10 +54,14 @@ function NavBar() {
         console.log(e.target.value)
     }
 
-    
+    const handleMenuClick = (e) => {
+        
+            setMobileMenu(!mobileMenu)
+        
+    }
 
     return (
-        <div className='pb-10 sm:pb-10 h-full border-b-4 bg-white sticky top-0 z-50'>
+        <div className='pb-10 sm:pb-10  border-b-4 bg-white sticky top-0 z-50'>
             <div className='flex justify-center bg-black text-white pt-2 pb-2 text-center'>
                 <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="/products" className='underline'><b>ShopNow</b></a></p>
                 <div className='relative' ref={languageMenuRef}>
@@ -73,15 +80,29 @@ function NavBar() {
                     )}
                 </div>
             </div>
+            {mobileMenu ? 
+            <div className='w-full h-[8000px] absolute bg-pink-500 '>
+                <IoMdClose className='text-3xl text-white ml-[360px] mt-10' onClick={handleMenuClick}/>
+                        <div className='w-full h-[300px] flex flex-col justify-center text-center text-white gap-5' >
 
+                        <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
+                        <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
+                        <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
+                        <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
+                        </div>
+                    
+                    
+            </div>
+            : null}
             <div className='flex mt-10'>
                 <div className='flex justify-between w-full lg:w-0'>
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
-                    <div className='flex flex-row gap-2 mr-20 items-center lg:hidden md:flex text-xl rounded-md'>
-                        <Link href={'/products'}> <FaSearch className='mr-1' /></Link>
+                    <div className='flex flex-row gap-2 mr-10 items-center lg:hidden md:flex text-xl rounded-md'>
+                        {/* <Link href={'/products'}> <FaSearch className='mr-1' /></Link>
                         <Link href={'/wishlist'}> <FaRegHeart className='ml-5 mr-5' /></Link>
                         <Link href={'/cart'}> <FaShoppingCart /></Link>
-                        <Link href={'/account'}><LuUser2 className='text-xl ml-5' /></Link>
+                        <Link href={'/account'}><LuUser2 className='text-xl ml-5' /></Link> */}
+                        <LuMenu className='text-3xl' onClick={handleMenuClick}/>
                     </div>
                 </div>
                 <div className='flex flex-row justify-center w-full hidden md:ml-80 sm:hidden lg:flex'>
