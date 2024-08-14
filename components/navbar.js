@@ -62,6 +62,21 @@ function NavBar() {
 
     return (
         <div className='pb-10 sm:pb-10  border-b-4 bg-white sticky top-0 z-50'>
+                        {mobileMenu ? 
+            <div className='w-full h-[8000px] absolute bg-red-500'>
+                        <div className='w-full h-[300px] flex flex-col justify-center text-center text-white gap-5 mt-40 text-xl' >
+
+                        <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
+                        <h1><Link href='/products' className=' ' onClick={handleMenuClick}>Shop</Link></h1>
+                        <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
+                        <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
+                        <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
+                <IoMdClose className='mx-auto text-3xl text-white  flex    mt-10' onClick={handleMenuClick}/>
+                        </div>
+                    
+                    
+            </div>
+            : null}
             <div className='flex justify-center bg-black text-white pt-2 pb-2 text-center'>
                 <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="/products" className='underline'><b>ShopNow</b></a></p>
                 <div className='relative' ref={languageMenuRef}>
@@ -80,29 +95,28 @@ function NavBar() {
                     )}
                 </div>
             </div>
-            {mobileMenu ? 
-            <div className='w-full h-[8000px] absolute bg-pink-500 '>
-                <IoMdClose className='text-3xl text-white ml-[360px] mt-10' onClick={handleMenuClick}/>
-                        <div className='w-full h-[300px] flex flex-col justify-center text-center text-white gap-5' >
 
-                        <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
-                        <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
-                        <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
-                        <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
-                        </div>
-                    
-                    
-            </div>
-            : null}
             <div className='flex mt-10'>
                 <div className='flex justify-between w-full lg:w-0'>
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
-                    <div className='flex flex-row gap-2 mr-10 items-center lg:hidden md:flex text-xl rounded-md'>
-                        {/* <Link href={'/products'}> <FaSearch className='mr-1' /></Link>
-                        <Link href={'/wishlist'}> <FaRegHeart className='ml-5 mr-5' /></Link>
-                        <Link href={'/cart'}> <FaShoppingCart /></Link>
-                        <Link href={'/account'}><LuUser2 className='text-xl ml-5' /></Link> */}
-                        <LuMenu className='text-3xl' onClick={handleMenuClick}/>
+                    <div className={`flex flex-row  mr-10 md:mr-[65px] items-center lg:hidden md:flex text-xl rounded-md ${mobileMenu ? "hidden" : ""}`}>
+                    <Link href={'/wishlist'} className='relative rounded-full'>
+                                <FaRegHeart className='text-xl ml-5' />
+                                {wishlistCount > 0 && (
+                                    <span className="absolute top-0 -mt-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                                        {wishlistCount}
+                                    </span>
+                                )}
+                            </Link>
+                            <Link href={'/cart'} className='relative w-[50px] rounded-full p-1'>
+                                <IoCartOutline className='text-2xl ml-3' />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-0 -mt-1 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </Link>
+                                <LuMenu className='text-3xl' onClick={handleMenuClick}/>
                     </div>
                 </div>
                 <div className='flex flex-row justify-center w-full hidden md:ml-80 sm:hidden lg:flex'>

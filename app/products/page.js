@@ -7,7 +7,7 @@ function ProuctList() {
 
   const [searchValue, setSearchValue] = useState('')
   const [filteredItems, setFilteredItems] = useState(Products)
-  const [pageNum, setPageNum] = useState(5)
+  let [pageNum, setPageNum] = useState(5)
   const [showItems, setShowItems] = useState(filteredItems.slice(0, 8))
 
 
@@ -22,16 +22,28 @@ const searchFun = () => {
 
 
 
-  const handlePagination = () => {
-    setPageNum(pageNum + 5)
+  const handleNextPagination = () => {
+    setPageNum(pageNum + 8)
     
-    const showedItems = Products.slice(pageNum, pageNum + 5)
+    const showedItems = Products.slice(pageNum, pageNum + 8)
     setShowItems(showedItems);
     
-    if (pageNum >= Products.length) {
-      alert('nothing to show')
+    if (pageNum === Products.length) {
+      pageNum = 5
     }
   }
+
+  const handlePrevPagination = () => {
+    setPageNum(pageNum - 8)
+    
+    const showedItems = Products.slice(pageNum, pageNum - 8)
+    setShowItems(showedItems);
+    
+    if (pageNum === Products.length) {
+      pageNum = 5
+    }
+  }
+
 
 
   return (
@@ -60,8 +72,11 @@ const searchFun = () => {
       ))}
       </div>
       </div>
+      <div className='flex justify-between m-20'>
 
-      <button onClick={handlePagination}>Click Me</button>
+      <button onClick={handleNextPagination}>Next</button>
+      <button onClick={handlePrevPagination}>Prev</button>
+      </div>
       </div>
   )
 }
