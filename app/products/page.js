@@ -4,6 +4,8 @@ import ProductsList from '../../components/products'
 import { Products } from '../products'
 import { IoFilter } from 'react-icons/io5'
 import { MdFilterListOff } from 'react-icons/md'
+import { useSearchParams } from 'next/navigation'
+
 
 function ProductList() {
   const [searchValue, setSearchValue] = useState('')
@@ -13,17 +15,24 @@ function ProductList() {
   const [filtersIcon, setFiltersIcon] = useState(false)
   const itemsPerPage = 8
 
+  let searchParams = useSearchParams()
+  const search = searchParams.get('s')
+  console.log(search) 
   useEffect(() => {
     filterProducts()
   }, [searchValue, category])
 
-  const filterProducts = () => {
+  const filterProducts = () => {  
     let filtered = Products
     
+    if (search !== '') {
+      setSearchValue(search)
+    }
+
     // Apply search filter
     if (searchValue) {
       filtered = filtered.filter((product) => 
-        product.title.toLowerCase().includes(searchValue.toLowerCase())
+        product.title.toString().toLowerCase().includes(searchValue.toString().toLowerCase())
       )
     }
     
@@ -35,7 +44,7 @@ function ProductList() {
     // If no results found with category filter, show all search results
     if (filtered.length === 0 && searchValue) {
       filtered = Products.filter((product) => 
-        product.title.toLowerCase().includes(searchValue.toLowerCase())
+        product.title.toLowerCase().includes(searchValue.toString().toLowerCase())
       )
       setCategory('') // Reset category selection
     }

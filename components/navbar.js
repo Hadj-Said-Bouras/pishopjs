@@ -13,18 +13,22 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../app/firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IoMdClose } from 'react-icons/io';
+import { useRouter } from 'next/navigation';
 
 function NavBar() {
     const [languageMenu, setLanguageMenu] = useState(false);
     const [userMenu, setUserMenu] = useState(false);
     const [hideMenu, setHideMenu] = useState(false);
     const [userSession] = useAuthState(auth);
-    const { cartCount, searchFn } = useCart();
+    const { cartCount } = useCart();
     const { wishlistCount } = useWishlist();
     const [user] = useAuthState(auth)
     const [mobileMenu, setMobileMenu] = useState(false)
-    const [menuClick, setMenuClick] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
 
+
+
+    const router = useRouter()
     const languageMenuRef = useRef(null);
     const userMenuRef = useRef(null);
 
@@ -50,15 +54,15 @@ function NavBar() {
     }, []);
 
     const handleSearch = (e) => {
-        searchFn(e.target.value)
-        console.log(e.target.value)
+        setSearchValue(e.target.value)
+       
     }
 
-    const handleMenuClick = (e) => {
-        
+    const handleMenuClick = () => {
             setMobileMenu(!mobileMenu)
-        
     }
+
+
 
     return (
         <div className='pb-10 sm:pb-10  border-b-4 bg-white sticky top-0 z-40'>
@@ -103,9 +107,15 @@ function NavBar() {
                 </div>
             </div>
 
-            <div className='flex mt-10'>
-                <div className='flex justify-between w-full lg:w-0'>
+            <div className='flex mt-10 justify-around'>
+                <div className='flex justify-between  w-full lg:w-0'>
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
+                    <div className='flex hidden md:flex lg:hidden'>
+                    <form className='flex items-center md:bg-transparent md:bg-gray-100' onSubmit={(e) => e.preventDefault()}>
+                            <input type="text" placeholder='search' name='search' className='bg-inherit focus:outline-none p-2 hidden  md:flex' onChange={(e) => {handleSearch(e)}}/>
+                            <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={() => router.push(`/products/?s=${searchValue}`)}/>
+                        </form>
+                    </div>
                     <div className={`flex flex-row  mr-10 md:mr-[65px] items-center lg:hidden md:flex text-xl rounded-md ${mobileMenu ? "hidden" : ""}`}>
                     <Link href={'/wishlist'} className='relative rounded-full'>
                                 <FaRegHeart className='text-xl ml-5' />
@@ -127,17 +137,17 @@ function NavBar() {
                     </div>
                 </div>
                 <div className='flex flex-row justify-center w-full hidden md:ml-80 sm:hidden lg:flex'>
-                    <div className='flex gap-10 mx-auto z-10 mr-40 md:flex md:ml-20 flex-nowrap'>
+                    <div className='flex gap-10 mx-auto z-10 xl:mr-40 lg:mr-60 md:flex md:ml-10 flex-nowrap'>
                         <Link href='/' className='transition transform hover:translate-y-1 duration-300'>Home</Link>
                         <Link href='/contact' className='transition transform hover:translate-y-1 duration-300'>Contact</Link>
                         <Link href='/about' className='transition transform hover:translate-y-1 duration-300'>About</Link>
                         <Link href='/products' className='transition transform hover:translate-y-1 duration-300'>Shop</Link>
                         <Link href='login' className={`${hideMenu ? "flex" : "hidden"} transition transform hover:translate-y-1 duration-300`}>Login</Link>
                     </div>
-                    <div className='flex items-center mr-0 lg:mr-80 xl:mr-0 lg:flex'>
-                        <form className='flex items-center md:bg-transparent xl:bg-gray-100'>
-                            <input type="text" placeholder='search' className='bg-inherit focus:outline-none p-2 md:hidden xl:flex' onChange={(e) => {handleSearch(e)}}/>
-                            <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={(e) => e.preventDefault()}/>
+                    <div className='flex items-center mr-0 lg:mr-80 xl:mr-0 lg:flex lg:mr-80'>
+                        <form className='flex items-center md:bg-transparent md:bg-gray-100' onSubmit={(e) => e.preventDefault()}>
+                            <input type="text" placeholder='search' name='search' className='bg-inherit focus:outline-none p-2 hidden  md:flex' onChange={(e) => {handleSearch(e)}}/>
+                            <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={() => router.push(`/products/?s=${searchValue}`)}/>
                         </form>
                         <div className='flex items-center'>
                             <Link href={'/wishlist'} className='relative rounded-full'>

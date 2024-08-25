@@ -7,15 +7,13 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   
   const [cartItems, setCartItems] = useState([]);
-  const [searchValue, setSearchValue] = useState('')
+  
 
   const addToCart = (item) => {
     setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  const searchFn = (value) => {
-    setSearchValue(value)
-  }
+
 
   const removeFromCart = (itemToRemove) => {
     if (itemToRemove) {
@@ -28,7 +26,7 @@ export function CartProvider({ children }) {
   const cartCount = cartItems.length;
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount, searchFn, searchValue  }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount,  }}>
       {children}
     </CartContext.Provider>
   );
