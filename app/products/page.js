@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import ProductsList from '../../components/products'
 import { Products } from '../products'
+import { IoFilter } from 'react-icons/io5'
+import { MdFilterListOff } from 'react-icons/md'
 
 function ProductList() {
   const [searchValue, setSearchValue] = useState('')
   const [filteredItems, setFilteredItems] = useState(Products)
   const [category, setCategory] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+  const [filtersIcon, setFiltersIcon] = useState(false)
   const itemsPerPage = 8
 
   useEffect(() => {
@@ -59,7 +62,14 @@ function ProductList() {
 
   return (
     <div className=''>
-      <div className='w-full h-full mt-10 flex justify-center'>
+
+      <div className='w-full h-full mt-10 flex justify-center flex-row items-center'>
+        <div className='bg-black mr-5 p-2 rounded cursor-pointer'>
+
+        <IoFilter className={`text-xl   text-white ${filtersIcon ? "hidden" : ''}`} onClick={() => setFiltersIcon(!filtersIcon)}/>
+        <MdFilterListOff className={`text-xl   text-white ${filtersIcon ? "" : 'hidden'}`} onClick={() => setFiltersIcon(!filtersIcon)}/>
+
+        </div>
         <input 
           type="text" 
           value={searchValue} 
@@ -68,15 +78,18 @@ function ProductList() {
           className='bg-gray-100 rounded-l-lg focus:outline-none p-2 w-[400px]'
         />
         <button className='text-white bg-black p-2 rounded-r-lg' onClick={filterProducts}>Search</button>
+
       </div>
-      <div className='text-center flex justify-center gap-20 m-5 flex-wrap'>
+      {filtersIcon ? 
+      <div className='bg-gray-500 w-fit h-full absolute z-40 flex flex-col lg:flex-row pt-5 lg:pt-0 lg:mx-auto top-40 sticky mt-5  rounded-lg mx-1 lg:items-center'>
         <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Computer Accessories' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Computer Accessories')}>Computer Accessories</h1>
         <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Computers' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Computers')}>Computers</h1>
         <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Smartphones' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Smartphones')}>Smartphones</h1>
         <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Gaming Accessories' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Gaming Accessories')}>Gaming Accessories</h1>
       </div>
+        : null}
       <div className='flex flex-row'>
-        <div className='flex w-full justify-center gap-5 flex-wrap mt-20'>
+        <div className='flex w-full justify-center gap-5 flex-wrap mt-10'>
           {currentItems.map((product, index) => (
             <div key={index}>
               <ProductsList 
