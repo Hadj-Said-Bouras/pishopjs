@@ -12,7 +12,9 @@ function LoginForm() {
 
   const [email, setemail] = useState('')
   const [password, setPassword] = useState('')
+  const [invalid, setInvalid] = useState(false)
   const router = useRouter()
+  
 
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
@@ -35,13 +37,14 @@ function LoginForm() {
         setemail('')
         setPassword('')
         router.push('/')
-      } else {
-        alert('unvaild login')
-        
-      }
+      } 
     } catch(e) {
       console.error(e)
-      alert('unvaild login')
+      setInvalid(true)
+      setTimeout(() => {
+        setInvalid(false)
+
+      }, 5000)
 
     }
   }
@@ -54,6 +57,9 @@ function LoginForm() {
             <div className='flex flex-col gap-3 w-full md:w-1/3 text-center md:text-left'>
                 <h1 className='font-semibold text-4xl'>Log in to WOS</h1>
                 <p>Enter your details below</p>
+                {invalid ? <div className='bg-red-500 text-white w-fit p-2 rounded-lg opacity-90 animate-bounce hover:opacity-100'>
+                  Invalid Login credentials! Please Try Again
+                </div> : null}
                 <form className='flex flex-col mt-10'
                 onSubmit={(e) => e.preventDefault()}
                 >

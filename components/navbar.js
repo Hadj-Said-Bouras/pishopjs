@@ -66,12 +66,19 @@ function NavBar() {
             <div className='w-full h-[8000px] absolute bg-red-500'>
                         <div className='w-full h-[300px] flex flex-col justify-center text-center text-white gap-5 mt-40 text-xl' >
 
-                        <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
-                        <h1><Link href='/products' className=' ' onClick={handleMenuClick}>Shop</Link></h1>
-                        <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
-                        <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
-                        <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
-                <IoMdClose className='mx-auto text-3xl text-white  flex    mt-10' onClick={handleMenuClick}/>
+                            <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
+                            <h1><Link href='/products' className=' ' onClick={handleMenuClick}>Shop</Link></h1>
+                            <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
+                            <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
+                            <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
+                            {user ? <button className='text-center mx-auto flex items-center gap-2' onClick={() => {
+                                    signOut(auth).then(() => {
+                                        setHideMenu(true);
+                                    }).catch((error) => {
+                                        console.error("Sign out error", error);
+                                    });
+                                }}><TbLogout2 className='text-xl' />Logout</button> : null}
+                            <IoMdClose className='mx-auto text-center text-4xl text-white  flex   mt-2 ' onClick={handleMenuClick}/>
                         </div>
                     
                     
