@@ -3,82 +3,112 @@ import React, { useEffect, useState } from 'react'
 import ProductsList from '../../components/products'
 import { Products } from '../products'
 
-function ProuctList() {
-
+function ProductList() {
   const [searchValue, setSearchValue] = useState('')
   const [filteredItems, setFilteredItems] = useState(Products)
-  let [pageNum, setPageNum] = useState(5)
-  const [showItems, setShowItems] = useState(filteredItems.slice(0, 8))
+  const [category, setCategory] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 8
 
+  useEffect(() => {
+    filterProducts()
+  }, [searchValue, category])
 
-const searchFun = () => {
-
-  setFilteredItems(
+  const filterProducts = () => {
+    let filtered = Products
     
-    Products.filter((product) => product.title.toLowerCase().includes(searchValue.toLowerCase())) 
+    // Apply search filter
+    if (searchValue) {
+      filtered = filtered.filter((product) => 
+        product.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    }
     
-  )
-}
+    // Apply category filter only if there are search results or no search term
+    if (category && (filtered.length > 0 || !searchValue)) {
+      filtered = filtered.filter((product) => product.category === category)
+    }
+    
+    // If no results found with category filter, show all search results
+    if (filtered.length === 0 && searchValue) {
+      filtered = Products.filter((product) => 
+        product.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+      setCategory('') // Reset category selection
+    }
 
+    setFilteredItems(filtered)
+    setCurrentPage(1)
+  }
 
+  const handleCategoryClick = (selectedCategory) => {
+    setCategory(selectedCategory === category ? '' : selectedCategory)
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem)
 
   const handleNextPagination = () => {
-    setPageNum(pageNum + 8)
-    
-    const showedItems = Products.slice(pageNum, pageNum + 8)
-    setShowItems(showedItems);
-    
-    if (pageNum === Products.length) {
-      pageNum = 5
-    }
+    setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredItems.length / itemsPerPage)))
   }
 
   const handlePrevPagination = () => {
-    setPageNum(pageNum - 8)
-    
-    const showedItems = Products.slice(pageNum, pageNum - 8)
-    setShowItems(showedItems);
-    
-    if (pageNum === Products.length) {
-      pageNum = 5
-    }
+    setCurrentPage((prev) => Math.max(prev - 1, 1))
   }
 
-
-
   return (
-    <div className=' '>
+    <div className=''>
       <div className='w-full h-full mt-10 flex justify-center'>
-        <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder='Place your Search' className='bg-gray-100 rounded-l-lg focus:outline-none p-2 w-[400px]'/>
-        <button className='text-white bg-black p-2 rounded-r-lg' onClick={searchFun}>Search</button>
+        <input 
+          type="text" 
+          value={searchValue} 
+          onChange={(e) => setSearchValue(e.target.value)} 
+          placeholder='Place your Search' 
+          className='bg-gray-100 rounded-l-lg focus:outline-none p-2 w-[400px]'
+        />
+        <button className='text-white bg-black p-2 rounded-r-lg' onClick={filterProducts}>Search</button>
       </div>
-
-      <div className='flex flex-row '>
-
-
-
-      <div className=' flex w-full justify-center gap-5 flex-wrap  mt-20 '>
-      
-      {searchValue ? filteredItems.map((product, index) => (
-        <div key={index}>
-
-        <ProductsList  imgUrl={product.imgUrl} product={product.title} comparedPrice={product.comparedPrice} price={product.price} reviews={product.reviews} id={product.id}/>
-        </div>
-      )): showItems.map((product, index) => (
-        <div key={index}>
-
-        <ProductsList  imgUrl={product.imgUrl} product={product.title} comparedPrice={product.comparedPrice} price={product.price} reviews={product.reviews} id={product.id}/>
-        </div>
-      ))}
+      <div className='text-center flex justify-center gap-20 m-5 flex-wrap'>
+        <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Computer Accessories' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Computer Accessories')}>Computer Accessories</h1>
+        <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Computers' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Computers')}>Computers</h1>
+        <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Smartphones' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Smartphones')}>Smartphones</h1>
+        <h1 className={`bg-gray-500 text-white p-2 rounded-full cursor-pointer flex flex-wrap ${category === 'Gaming Accessories' ? 'bg-red-500 text-red' : ''}`} onClick={() => handleCategoryClick('Gaming Accessories')}>Gaming Accessories</h1>
       </div>
+      <div className='flex flex-row'>
+        <div className='flex w-full justify-center gap-5 flex-wrap mt-20'>
+          {currentItems.map((product, index) => (
+            <div key={index}>
+              <ProductsList 
+                imgUrl={product.imgUrl} 
+                product={product.title} 
+                comparedPrice={product.comparedPrice} 
+                price={product.price} 
+                reviews={product.reviews} 
+                id={product.id}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <div className='flex justify-between m-20'>
-
-      <button onClick={handleNextPagination}>Next</button>
-      <button onClick={handlePrevPagination}>Prev</button>
+        <button 
+          onClick={handlePrevPagination} 
+          className='bg-red-500 p-2 px-3 text-white text-xl rounded-lg'
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <button 
+          onClick={handleNextPagination} 
+          className='bg-red-500 p-2 px-3 text-white text-xl rounded-lg'
+          disabled={currentPage === Math.ceil(filteredItems.length / itemsPerPage)}
+        >
+          Next
+        </button>
       </div>
-      </div>
+    </div>
   )
 }
 
-export default ProuctList
+export default ProductList

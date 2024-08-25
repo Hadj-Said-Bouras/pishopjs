@@ -131,6 +131,7 @@ function NavBar() {
                         <Link href='/' className='transition transform hover:translate-y-1 duration-300'>Home</Link>
                         <Link href='/contact' className='transition transform hover:translate-y-1 duration-300'>Contact</Link>
                         <Link href='/about' className='transition transform hover:translate-y-1 duration-300'>About</Link>
+                        <Link href='/products' className='transition transform hover:translate-y-1 duration-300'>Shop</Link>
                         <Link href='login' className={`${hideMenu ? "flex" : "hidden"} transition transform hover:translate-y-1 duration-300`}>Login</Link>
                     </div>
                     <div className='flex items-center mr-0 lg:mr-80 xl:mr-0 lg:flex'>
