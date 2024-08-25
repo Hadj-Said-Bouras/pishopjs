@@ -61,13 +61,13 @@ function NavBar() {
     }
 
     return (
-        <div className='pb-10 sm:pb-10  border-b-4 bg-white sticky top-0 z-50'>
+        <div className='pb-10 sm:pb-10  border-b-4 bg-white sticky top-0 z-40'>
                         {mobileMenu ? 
             <div className='w-full h-[8000px] absolute bg-red-500'>
                         <div className='w-full h-[300px] flex flex-col justify-center text-center text-white gap-5 mt-40 text-xl' >
 
                             <h1><Link href='/' className=' ' onClick={handleMenuClick}>Home</Link></h1>
-                            <h1><Link href='/products' className=' ' onClick={handleMenuClick}>Shop</Link></h1>
+                            <h1><Link href='/products' className='' onClick={handleMenuClick}>Shop</Link></h1>
                             <h1><Link href='/contact' className=' ' onClick={handleMenuClick}>Contact</Link></h1>
                             <h1><Link href='/about' className=' ' onClick={handleMenuClick}>About</Link></h1>
                             <h1><Link href='login' className={`${hideMenu ? "" : "hidden"}  duration-300`} onClick={handleMenuClick}>Login</Link></h1>
@@ -78,7 +78,7 @@ function NavBar() {
                                         console.error("Sign out error", error);
                                     });
                                 }}><TbLogout2 className='text-xl' />Logout</button> : null}
-                            <IoMdClose className='mx-auto text-center text-4xl text-white  flex   mt-2 ' onClick={handleMenuClick}/>
+                            <IoMdClose className='mx-auto text-center text-4xl text-white  flex mt-2 ' onClick={handleMenuClick}/>
                         </div>
                     
                     
