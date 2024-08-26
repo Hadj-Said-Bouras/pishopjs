@@ -118,5 +118,96 @@ export const Products = [
         reviews: 50,
         imgUrl: ['/p2.jpg', '/p4.jpg', '/p3.jpg'],
         category: 'Smartphones'
+    },
+    {
+        id: 13,
+        title: 'Mechanical Gaming Keyboard',
+        description: 'A mechanical keyboard with customizable RGB backlighting and programmable keys for gamers.',
+        price: '$99.99',
+        comparedPrice: '$129.99',
+        reviews: 300,
+        imgUrl: ['/p5.jpg', '/p6.jpg', '/p7.jpg'],
+        category: 'Gaming Accessories'
+    },
+    {
+        id: 14,
+        title: 'Smartwatch with Fitness Tracking',
+        description: 'A stylish smartwatch with heart rate monitoring, GPS, and fitness tracking features.',
+        price: '$199.99',
+        comparedPrice: '$249.99',
+        reviews: 400,
+        imgUrl: ['/p8.jpg', '/p9.jpg', '/p10.jpg'],
+        category: 'Wearables'
+    },
+    {
+        id: 15,
+        title: 'Noise-Cancelling Headphones',
+        description: 'High-quality wireless headphones with active noise cancellation and immersive sound.',
+        price: '$249.99',
+        comparedPrice: '$299.99',
+        reviews: 500,
+        imgUrl: ['/p11.jpg', '/p12.jpg', '/p13.jpg'],
+        category: 'Audio'
+    },
+    {
+        id: 16,
+        title: '4K Ultra HD Monitor',
+        description: 'A 27-inch 4K monitor with vibrant colors and ultra-sharp image quality, perfect for creative professionals.',
+        price: '$349.99',
+        comparedPrice: '$399.99',
+        reviews: 120,
+        imgUrl: ['/p14.jpg', '/p15.jpg', '/p16.jpg'],
+        category: 'Monitors'
+    },
+    {
+        id: 17,
+        title: 'Portable Bluetooth Speaker',
+        description: 'A compact and powerful Bluetooth speaker with deep bass and water-resistant design.',
+        price: '$99.99',
+        comparedPrice: '$129.99',
+        reviews: 250,
+        imgUrl: ['/p17.jpg', '/p18.jpg', '/p19.jpg'],
+        category: 'Audio'
+    },
+    {
+        id: 18,
+        title: 'Advanced Fitness Tracker',
+        description: 'A sleek fitness tracker with detailed health metrics, including sleep monitoring and calorie counting.',
+        price: '$79.99',
+        comparedPrice: '$99.99',
+        reviews: 200,
+        imgUrl: ['/p20.jpg', '/p21.jpg', '/p22.jpg'],
+        category: 'Wearables'
+    },
+    {
+        id: 19,
+        title: 'High-Definition Webcam',
+        description: 'A 1080p HD webcam with auto-focus and noise-reducing microphone for clear video calls.',
+        price: '$59.99',
+        comparedPrice: '$79.99',
+        reviews: 150,
+        imgUrl: ['/p23.jpg', '/p24.jpg', '/p25.jpg'],
+        category: 'Computer Accessories'
+    },
+    {
+        id: 20,
+        title: 'Curved Gaming Monitor',
+        description: 'A 32-inch curved gaming monitor with a high refresh rate and low response time for smooth gameplay.',
+        price: '$399.99',
+        comparedPrice: '$499.99',
+        reviews: 180,
+        imgUrl: ['/p26.jpg', '/p27.jpg', '/p28.jpg'],
+        category: 'Monitors'
     }
-]
+];
+
+export const Categories = [
+    'Computers',
+    'Smartphones',
+    'Gaming Accessories',
+    'Wearables',
+    'Audio',
+    'Monitors',
+    'Computer Accessories',
+    'Gaming'
+];

@@ -18,8 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
       <WishlistProvider>
-      <CartProvider>
-        
+      <CartProvider>        
         <NavBar />
         {children}
         <Footer />
