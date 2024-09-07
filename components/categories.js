@@ -1,15 +1,17 @@
 "use client"
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { HiOutlineArrowSmallRight, HiOutlineArrowSmallLeft  } from "react-icons/hi2";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
-
+import { CategoriesProduct } from '../app/products';
+import { useRouter } from 'next/navigation';
 
 
 
 
 function Categories() {
+  const router = useRouter()
   const swiperRef = useRef(null)
   const handleInit = (swiper) => {
     swiperRef.current = swiper;
@@ -27,6 +29,7 @@ function Categories() {
     }
 
   }
+
   return (
     <div className='w-full h-2/6'>
        <div className='flex flex-row items-center ml-2 sm:ml-10 mt-20 gap-2'>
@@ -68,58 +71,24 @@ function Categories() {
         className='flex justify-center'
         >
         
-          <SwiperSlide>
+        {CategoriesProduct.map((category, index) => (
+
+          <SwiperSlide key={index}>
            
             
 
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
+            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300 cursor-pointer' onClick={() => router.push(`/products/c/${category.name}`)}>
+              <div className='flex flex-col items-center justify-center w-full h-full text-center'>
 
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
+              <div className='text-6xl'>
+                {category.icon}
+                </div>
+              <p>{category.name}</p>
+              </div>
+              {/* <Image src={'/phone.png'} /> */}
             </div>
           </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300'>
-
-              <Image src={'/phone.png'} width={100} height={90} alt='phones' className='mx-auto'/>
-              <p>Iphones</p>
-            </div>
-          </SwiperSlide>
+          ))}
         </Swiper>
           </div>
         

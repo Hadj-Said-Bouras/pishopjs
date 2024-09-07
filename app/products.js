@@ -1,3 +1,7 @@
+import { FaLaptop, FaMobileAlt, FaGamepad, FaHeadphones, FaTv, FaKeyboard, FaMouse, FaDesktop } from 'react-icons/fa';
+import { MdWatch } from 'react-icons/md';
+
+
 export const Products = [
     {
         id: 1,
@@ -126,7 +130,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 300,
-        imgUrl: ['/p5.jpg', '/p6.jpg', '/p7.jpg'],
+        imgUrl: ['/p1.jpg', '/p6.jpg', '/p7.jpg'],
         category: 'Gaming Accessories'
     },
     {
@@ -136,7 +140,7 @@ export const Products = [
         price: '$199.99',
         comparedPrice: '$249.99',
         reviews: 400,
-        imgUrl: ['/p8.jpg', '/p9.jpg', '/p10.jpg'],
+        imgUrl: ['/p2.jpg', '/p3.jpg', '/p1.jpg'],
         category: 'Wearables'
     },
     {
@@ -146,7 +150,7 @@ export const Products = [
         price: '$249.99',
         comparedPrice: '$299.99',
         reviews: 500,
-        imgUrl: ['/p11.jpg', '/p12.jpg', '/p13.jpg'],
+        imgUrl: ['/p1.jpg', '/p4.jpg', '/p3.jpg'],
         category: 'Audio'
     },
     {
@@ -156,7 +160,7 @@ export const Products = [
         price: '$349.99',
         comparedPrice: '$399.99',
         reviews: 120,
-        imgUrl: ['/p14.jpg', '/p15.jpg', '/p16.jpg'],
+        imgUrl: ['/p4.jpg', '/p5.jpg', '/p1.jpg'],
         category: 'Monitors'
     },
     {
@@ -166,7 +170,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 250,
-        imgUrl: ['/p17.jpg', '/p18.jpg', '/p19.jpg'],
+        imgUrl: ['/p1.jpg', '/p4.jpg', '/p2.jpg'],
         category: 'Audio'
     },
     {
@@ -176,7 +180,7 @@ export const Products = [
         price: '$79.99',
         comparedPrice: '$99.99',
         reviews: 200,
-        imgUrl: ['/p20.jpg', '/p21.jpg', '/p22.jpg'],
+        imgUrl: ['/p4.jpg', '/p2.jpg', '/p4.jpg'],
         category: 'Wearables'
     },
     {
@@ -186,7 +190,7 @@ export const Products = [
         price: '$59.99',
         comparedPrice: '$79.99',
         reviews: 150,
-        imgUrl: ['/p23.jpg', '/p24.jpg', '/p25.jpg'],
+        imgUrl: ['/p1.jpg', '/p2.jpg', '/p3.jpg'],
         category: 'Computer Accessories'
     },
     {
@@ -196,18 +200,20 @@ export const Products = [
         price: '$399.99',
         comparedPrice: '$499.99',
         reviews: 180,
-        imgUrl: ['/p26.jpg', '/p27.jpg', '/p28.jpg'],
+        imgUrl: ['/p2.jpg', '/p4.jpg', '/p3.jpg'],
         category: 'Monitors'
     }
 ];
 
-export const Categories = [
-    'Computers',
-    'Smartphones',
-    'Gaming Accessories',
-    'Wearables',
-    'Audio',
-    'Monitors',
-    'Computer Accessories',
-    'Gaming'
+
+// Array of category objects with names and icons
+export const CategoriesProduct = [
+    { name: 'Computers', icon: <FaLaptop /> },            // Laptop icon
+    { name: 'Smartphones', icon: <FaMobileAlt /> },       // Mobile phone icon
+    { name: 'Gaming Accessories', icon: <FaGamepad /> },  // Gamepad icon
+    { name: 'Wearables', icon: <MdWatch /> },             // Watch icon (Material Icons)
+    { name: 'Audio', icon: <FaHeadphones /> },            // Headphones icon
+    { name: 'Monitors', icon: <FaTv /> },                 // TV icon (commonly used for monitors)
+    { name: 'Computer Accessories', icon: <FaKeyboard /> }, // Keyboard icon (you can also use FaMouse for mouse)
+    { name: 'Gaming', icon: <FaDesktop /> },              // Desktop icon (for overall gaming setup)
 ];

@@ -1,12 +1,13 @@
 "use client"
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 function Banner() {
     const images = [
-        '/cph.jpg',
-        '/ntb.jpg',
-        '/techno.jpg',
+        { pic: '/techno.jpg', link: "https://technostationery.com/"},
+        { pic: '/ntb.jpg', link: "https://technostationery.com/"},
+        { pic: '/cph.jpg', link: "https://technostationery.com/"},
     ]
     const delay = 2500;
 
@@ -28,7 +29,7 @@ function Banner() {
                     <div className='h-[400px] w-full inline-block transition-transform ease-in-out' style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
                         {images.map((image, imageIndex) => (
                             <div key={imageIndex} className={`h-full w-full rounded inline-block`}>
-                                <Image src={`${image}`} width={892} height={344} alt='00d' />
+                                <Link href={image.link}><Image src={`${image.pic}`} width={892} height={344} alt='00d' /></Link>
                             </div>
                         ))}
                     </div>

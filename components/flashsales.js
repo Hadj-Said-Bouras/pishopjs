@@ -154,9 +154,6 @@ return (
                                         <MdOutlineStarPurple500 />
                                         <p className='text-gray-500 ml-2'>{`${product.reviews}`}</p>
                                     </div>
-                                    {/* <div className='text-gray-500 ml-2 max-h-8 overflow-hidden text-ellipsis'>
-                                    <p className='leading-tight'>{product.description}</p>
-                                </div>                               */}
                         </div>
                     </SwiperSlide>
                    
