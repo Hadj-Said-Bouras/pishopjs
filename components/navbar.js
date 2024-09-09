@@ -111,7 +111,7 @@ function NavBar() {
                 <div className='flex justify-between  w-full lg:w-0'>
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
                     <div className='flex hidden md:flex lg:hidden'>
-                    <form className='flex items-center md:bg-inherit md:bg-gray-100' onSubmit={(e) => e.preventDefault()}>
+                    <form className='flex items-center  md:bg-gray-100' onSubmit={(e) => e.preventDefault()}>
                             <input type="text" placeholder='search' name='search' className='bg-inherit focus:outline-none p-2 hidden  md:flex' onChange={(e) => {handleSearch(e)}}/>
                             <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={() => router.push(`/products/?s=${searchValue}`)}/>
                         </form>

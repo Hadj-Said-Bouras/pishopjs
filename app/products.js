@@ -130,7 +130,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 300,
-        imgUrl: ['/p1.jpg', '/p6.jpg', '/p7.jpg'],
+        imgUrl: ['/P2.jpg', '/p6.jpg', '/p7.jpg'],
         category: 'Gaming Accessories'
     },
     {
@@ -140,7 +140,7 @@ export const Products = [
         price: '$199.99',
         comparedPrice: '$249.99',
         reviews: 400,
-        imgUrl: ['/p2.jpg', '/p3.jpg', '/p1.jpg'],
+        imgUrl: ['/p2.jpg', '/p3.jpg', '/P2.jpg'],
         category: 'Wearables'
     },
     {
@@ -150,7 +150,7 @@ export const Products = [
         price: '$249.99',
         comparedPrice: '$299.99',
         reviews: 500,
-        imgUrl: ['/p1.jpg', '/p4.jpg', '/p3.jpg'],
+        imgUrl: ['/P2.jpg', '/p4.jpg', '/p3.jpg'],
         category: 'Audio'
     },
     {
@@ -160,7 +160,7 @@ export const Products = [
         price: '$349.99',
         comparedPrice: '$399.99',
         reviews: 120,
-        imgUrl: ['/p4.jpg', '/p5.jpg', '/p1.jpg'],
+        imgUrl: ['/p4.jpg', '/p5.jpg', '/P2.jpg'],
         category: 'Monitors'
     },
     {
@@ -170,7 +170,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 250,
-        imgUrl: ['/p1.jpg', '/p4.jpg', '/p2.jpg'],
+        imgUrl: ['/P2.jpg', '/p4.jpg', '/p2.jpg'],
         category: 'Audio'
     },
     {
@@ -190,7 +190,7 @@ export const Products = [
         price: '$59.99',
         comparedPrice: '$79.99',
         reviews: 150,
-        imgUrl: ['/p1.jpg', '/p2.jpg', '/p3.jpg'],
+        imgUrl: ['/P2.jpg', '/p2.jpg', '/p3.jpg'],
         category: 'Computer Accessories'
     },
     {
