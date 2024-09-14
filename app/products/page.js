@@ -5,7 +5,6 @@ import { CategoriesProduct, Products } from '../products'
 import { IoFilter } from 'react-icons/io5'
 import { MdFilterListOff } from 'react-icons/md'
 
-// This is now a Server Component
 export default function ProductList({ searchParams }) {
   const [searchValue, setSearchValue] = useState(searchParams.s || '')
   const [filteredItems, setFilteredItems] = useState(Products)
@@ -71,15 +70,23 @@ export default function ProductList({ searchParams }) {
       {filtersIcon && (
         <div className='relative lg:static lg:mt-5 h-fit z-30 flex lg:flex-row flex-col justify-center w-fit lg:mx-auto lg:items-center'>
           <div className='bg-gray-500 absolute lg:static top-2 flex flex-col lg:flex-row rounded-md'>
-            {CategoriesProduct.map((categorySelected, index) => (
-              <h1 
-                key={index} 
-                className={`bg-gray-500 text-white p-2 rounded-lg cursor-pointer ${category === categorySelected ? 'bg-red-500 text-red' : ''}`}
-                onClick={() => handleCategoryClick(categorySelected)}
-              >
-                {categorySelected}
-              </h1>
-            ))}
+            {CategoriesProduct.map((categoryItem, index) => {
+              // Safely render the icon
+              const IconComponent = categoryItem.icon && typeof categoryItem.icon === 'function' 
+                ? categoryItem.icon 
+                : null;
+
+              return (
+                <div 
+                  key={index} 
+                  className={`bg-gray-500 text-white p-2 rounded-lg cursor-pointer ${category === categoryItem.name ? 'bg-red-500 text-red' : ''}`}
+                  onClick={() => handleCategoryClick(categoryItem.name)}
+                >
+                  {IconComponent && <IconComponent />}
+                  <span>{categoryItem.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
