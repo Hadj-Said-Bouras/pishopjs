@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { FaChevronDown, FaRegHeart, FaShoppingCart, FaSearch, FaRegStar } from "react-icons/fa";
+import { FaChevronDown, FaRegHeart, FaSearch, FaRegStar } from "react-icons/fa";
 import { LuShoppingBag, LuUser2, LuMenu } from 'react-icons/lu';
 import useCart from '../components/cartcontext';
 import useWishlist from '../components/whitelistcontext';
