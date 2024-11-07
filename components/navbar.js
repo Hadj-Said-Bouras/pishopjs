@@ -13,7 +13,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../app/firebase/config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IoMdClose } from 'react-icons/io';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 function NavBar() {
     const [languageMenu, setLanguageMenu] = useState(false);
@@ -25,9 +25,11 @@ function NavBar() {
     const [user] = useAuthState(auth)
     const [mobileMenu, setMobileMenu] = useState(false)
     const [searchValue, setSearchValue] = useState('')
+    const [productsPage, setProductsPage] = useState(false)
 
 
-
+    const url = usePathname()
+    console.log(url)
     const router = useRouter()
     const languageMenuRef = useRef(null);
     const userMenuRef = useRef(null);
@@ -43,6 +45,14 @@ function NavBar() {
 
     const toggleLanguageMenu = () => setLanguageMenu(prev => !prev);
     const toggleUserMenu = () => setUserMenu(prev => !prev);
+
+    useEffect(() => {
+        if (url === '/products') {
+            setProductsPage(!productsPage)
+        } else {
+            setProductsPage(false)
+        }
+    }, [url])
 
     useEffect(() => {
         setHideMenu(!userSession);
@@ -111,7 +121,7 @@ function NavBar() {
                 <div className='flex justify-between  w-full lg:w-0'>
                     <Link href="/" className='font-bold sm:ml-10 ml-10 md:ml-10 text-xl'>PISHOP</Link>
                     <div className='flex hidden md:flex lg:hidden'>
-                    <form className='flex items-center  md:bg-gray-100' onSubmit={(e) => e.preventDefault()}>
+                    <form className={`flex items-center  md:bg-gray-100 ${productsPage ? 'hidden' : ''}`} onSubmit={(e) => e.preventDefault()}>
                             <input type="text" placeholder='search' name='search' className='bg-inherit focus:outline-none p-2 hidden  md:flex' onChange={(e) => {handleSearch(e)}}/>
                             <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={() => router.push(`/products/?s=${searchValue}`)}/>
                         </form>
@@ -145,7 +155,7 @@ function NavBar() {
                         <Link href='login' className={`${hideMenu ? "flex" : "hidden"} transition transform hover:translate-y-1 duration-300`}>Login</Link>
                     </div>
                     <div className='flex items-center mr-0 lg:mr-80 xl:mr-0 lg:flex lg:mr-80 '>
-                        <form className='flex items-center md:bg-gray-100 md:bg-gray-100 rounded-lg' onSubmit={(e) => e.preventDefault()}>
+                        <form className={`flex items-center md:bg-gray-100 md:bg-gray-100 rounded-lg ${productsPage ? 'hidden' : ''}`} onSubmit={(e) => e.preventDefault()}>
                             <input type="text" placeholder='search' name='search' className='bg-gray-100 rounded-lg focus:outline-none p-2 hidden  md:flex' onChange={(e) => {handleSearch(e)}}/>
                             <FaSearch className='mr-3 cursor-pointer' type='submit' onClick={() => router.push(`/products/?s=${searchValue}`)}/>
                         </form>

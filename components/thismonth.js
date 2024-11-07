@@ -54,7 +54,6 @@ function ThisMonth() {
     }
   };
 
-  // Generate random items on the client side
   const randomItems = () => {
     let collection = [];
     let items = Array.from(Products);
@@ -65,7 +64,6 @@ function ThisMonth() {
   };
 
   useEffect(() => {
-    // Set random products only after the component mounts on the client side
     setRandomProducts(randomItems());
   }, []);
 

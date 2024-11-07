@@ -77,15 +77,14 @@ function Categories() {
            
             
 
-            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300 cursor-pointer' onClick={() => router.push(`/products/c/${category.name}`)}>
+            <div className='flex flex-col items-center w-[170px] h-[145px] border-2 border-gray-300 cursor-pointer' onClick={() => router.push(`/products/?c=${category.name}`)}>
               <div className='flex flex-col items-center justify-center w-full h-full text-center'>
 
               <div className='text-6xl'>
                 {category.icon}
                 </div>
-              <p>{category.name}</p>
+              <p>{category.name.charAt(0).toUpperCase() + category.name.slice(1).replace(/-/g, ' ')}</p>
               </div>
-              {/* <Image src={'/phone.png'} /> */}
             </div>
           </SwiperSlide>
           ))}

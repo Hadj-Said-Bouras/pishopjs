@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import { auth } from '../app/firebase/config'
 import Link from 'next/link'
@@ -14,7 +14,6 @@ function LoginForm() {
   const [password, setPassword] = useState('')
   const [invalid, setInvalid] = useState(false)
   const router = useRouter()
-  
 
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
@@ -43,11 +42,12 @@ function LoginForm() {
       setInvalid(true)
       setTimeout(() => {
         setInvalid(false)
-
+        
       }, 5000)
-
+      
     }
   }
+  
 
 
   return (
@@ -66,7 +66,7 @@ function LoginForm() {
                     <div className='flex gap-8 flex-col mx-auto md:mx-0 w-5/6'>
 
                     <input  className='border-b border-gray-500 ' type="text" placeholder='Enter Your Email Or Phone Number' required onChange={(event) => handleEmail(event)} value={email}/>
-                    <input  className='border-b border-gray-500 ' type="password" name="password" id="password" placeholder='Password' required onChange={(event) => handlePassword(event)} value={password}/>
+                    <input  className='border-b border-gray-500 ' type="password" name="password"  placeholder='Password' required onChange={(event) => handlePassword(event)} value={password}/>
                     <div className='flex flex-row justify-between items-center'>
 
                     <button className='bg-red-600 text-white text-lg px-7 py-2 rounded' onClick={handleLogIn}>Log In</button>

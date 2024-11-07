@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase/config'
 
@@ -12,10 +12,8 @@ function Account() {
         const userSession = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null;
 
         if (!user && !userSession) {
-            router.push('/');
-        } else {
-            router.push('/login')
-        }
+            router.push('/login');
+        } 
     }, [user, router]);
 
   return (
@@ -73,6 +71,7 @@ function Account() {
             </div>
         </div>
     </div>
+    
   )
 }
 
