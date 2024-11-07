@@ -140,7 +140,7 @@ export const Products = [
         price: '$199.99',
         comparedPrice: '$249.99',
         reviews: 400,
-        imgUrl: ['/p2.jpg', '/p3.jpg', '/P2.jpg'],
+        imgUrl: ['/p2.jpg', '/p3.jpg', '/p2.jpg'],
         category: 'wearables'
     },
     {
@@ -150,7 +150,7 @@ export const Products = [
         price: '$249.99',
         comparedPrice: '$299.99',
         reviews: 500,
-        imgUrl: ['/P2.jpg', '/p4.jpg', '/p3.jpg'],
+        imgUrl: ['/p2.jpg', '/p4.jpg', '/p3.jpg'],
         category: 'audio'
     },
     {
@@ -160,7 +160,7 @@ export const Products = [
         price: '$349.99',
         comparedPrice: '$399.99',
         reviews: 120,
-        imgUrl: ['/p4.jpg', '/p5.jpg', '/P2.jpg'],
+        imgUrl: ['/p4.jpg', '/p5.jpg', '/p2.jpg'],
         category: 'monitors'
     },
     {
