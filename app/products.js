@@ -130,7 +130,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 300,
-        imgUrl: ['/P2.jpg', '/p6.jpg', '/p7.jpg'],
+        imgUrl: ['/p2.jpg', '/p6.jpg', '/p7.jpg'],
         category: 'gaming-accessories'
     },
     {
@@ -170,7 +170,7 @@ export const Products = [
         price: '$99.99',
         comparedPrice: '$129.99',
         reviews: 250,
-        imgUrl: ['/P2.jpg', '/p4.jpg', '/p2.jpg'],
+        imgUrl: ['/p2.jpg', '/p4.jpg', '/p2.jpg'],
         category: 'audio'
     },
     {
@@ -190,7 +190,7 @@ export const Products = [
         price: '$59.99',
         comparedPrice: '$79.99',
         reviews: 150,
-        imgUrl: ['/P2.jpg', '/p2.jpg', '/p3.jpg'],
+        imgUrl: ['/p2.jpg', '/p2.jpg', '/p3.jpg'],
         category: 'computer-accessories'
     },
     {
